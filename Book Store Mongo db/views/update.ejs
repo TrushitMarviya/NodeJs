@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+h1{
+    font-size: 35px;
+}
+.container {
+padding: 20px;
+margin: 5%;
+}    
+.form-container {
+width: 350px;
+border-radius: 15px;
+padding: 35px;
+box-shadow: rgba(50, 50, 93, 0.6) 0px 0px 12px -2px, rgba(0, 0, 0, 0.6) 0px 3px 7px -3px;
+}
+.form-container form {
+display: flex;
+flex-direction: column;
+gap: 10px;
+}
+
+.form-container input,
+.form-container button {
+padding: 10px;
+font-size: 1rem;
+margin-bottom: 10px;
+border: 1px solid #ddd;
+border-radius: 4px;
+width: 100%;
+}
+
+.form-container button {
+background-color: #007bff;
+color: white;
+cursor: pointer;
+border: none;
+display: block;
+}
+.form-container button:hover {
+background-color: #0056b3;
+}
+
+@media (max-width: 480px) {
+    .form-container{
+        width: 365px;
+        margin-left: -9%;
+        margin-top: 30%;
+    }
+}
+
+</style>
+<body>
+    <center>
+    <div class="container">
+    <form action="/updateData" method="post" class="form-container">
+        <input type="text"  name="id" hidden value="<%=data.id%>">
+        <input type="text" name="image" placeholder="Enter Image" value="<%=data.image%>">
+        <input type="text" placeholder="Book Name" name="name" value="<%=data.name%>">
+        <input type="text" placeholder="Author Name" name="author" value="<%=data.author%>">
+        <input type="text" placeholder="book Price" name="price" value="<%=data.price%>">
+        <input type="date" name="date" value="<%=data.date%>">
+        <button type="submit">Update Data</button>
+    </form>
+</div>
+</center>
+</body>
+</html> 
