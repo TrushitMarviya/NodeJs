@@ -54,7 +54,6 @@ module.exports.editAdmin = async (req, res) => {
   let singleData = await schema.findById(req.query.id);
   res.render("updateAdmin", { singleData });
 };
-
 module.exports.updateAdmin = async (req, res) => {
   let img = "";
   let singleData = await schema.findById(req.body.id);
