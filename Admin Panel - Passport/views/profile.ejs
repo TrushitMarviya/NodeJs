@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <!-- Favicon icon -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="assets/images/favicon.png"
+    />
+    <title>Matrix Template - The Ultimate Multipurpose admin template</title>
+    <!-- Custom CSS -->
+    <link href="dist/css/style.min.css" rel="stylesheet" />
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+    <div class="preloader">
+      <div class="lds-ripple">
+        <div class="lds-pos"></div>
+        <div class="lds-pos"></div>
+      </div>
+    </div>
+
+    <div id="main-wrapper">
+      <%- include("header")%> <%- include("aside")%>
+
+      <div class="page-wrapper">
+        <div class="page-breadcrumb">
+          <div class="row">
+            <div class="col-12 d-flex no-block align-items-center">
+              <h4 class="page-title">Invoice</h4>
+              <div class="ml-auto text-right">
+                <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">
+                      Library
+                    </li>
+                  </ol>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="page-content page-container" id="page-content">
+          <div class="padding">
+            <br /><br /><br />
+            <div class="row container d-flex justify-content-center">
+              <div class="col-xl-6 col-md-12">
+                <div class="card user-card-full">
+                  <div class="row m-l-0 m-r-0">
+                    <div class="col-sm-4 bg-c-lite-green user-profile">
+                      <div class="card-block text-center">
+                        <div class="m-b-25">
+                          <img
+                            src="<%=locals.user.image%>"
+                            class="img-radius"
+                            alt="User-Profile-Image"
+                            style="
+                              width: 175px;
+                              border: 2px solid;
+                              border-radius: 50%;
+                            "
+                          />
+                        </div>
+                        <h3 class="f-w-600">
+                          <%=locals.user.fname%> <%=locals.user.lname%>
+                        </h3>
+                        <i
+                          class="mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"
+                        ></i>
+                      </div>
+                    </div>
+                    <div class="col-sm-8">
+                      <div class="card-block">
+                        <h6 class="m-b-20 p-b-5 b-b-default f-w-600 pt-5">
+                          Information
+                        </h6>
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <p class="m-b-10 f-w-600 h5">Email</p>
+                            <h4 class="text-muted f-w-400">
+                              <%=locals.user.email%>
+                            </h4>
+                          </div>
+                          <div class="col-sm-6">
+                            <p class="m-b-10 f-w-600 h5">Phone</p>
+                            <h4 class="text-muted f-w-400"><%=locals.user.mobile%></h4>
+                          </div>
+                        </div>
+                        <h4 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">
+                          Projects
+                        </h4>
+                        <div class="row">
+                          <div class="col-sm-6">
+                            <p class="m-b-10 f-w-600">Recent</p>
+                            <h6 class="text-muted f-w-400">Sam Disuja</h6>
+                          </div>
+                          <div class="col-sm-6">
+                            <p class="m-b-10 f-w-600">Most Viewed</p>
+                            <h6 class="text-muted f-w-400">Dinoter husainm</h6>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br /><br /><br /><br /><br />
+        <footer class="footer text-center">
+          All Rights Reserved by Matrix-admin. Designed and Developed by
+          <a href="https://wrappixel.com">WrapPixel</a>.
+        </footer>
+        <!-- ============================================================== -->
+        <!-- End footer -->
+        <!-- ============================================================== -->
+      </div>
+      <!-- ============================================================== -->
+      <!-- End Page wrapper  -->
+      <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    <script src="assets/libs/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="assets/libs/popper.js/dist/umd/popper.min.js"></script>
+    <script src="assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src="assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+    <script src="assets/extra-libs/sparkline/sparkline.js"></script>
+    <!--Wave Effects -->
+    <script src="dist/js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="dist/js/sidebarmenu.js"></script>
+    <!--Custom JavaScript -->
+    <script src="dist/js/custom.min.js"></script>
+  </body>
+</html>

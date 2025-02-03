@@ -18,11 +18,11 @@ app.use(session({
     secret: 'abc',
     resave: true,
     saveUninitialized: false,
-    cookie: { Maxage: 100*100*60}
+    cookie: { Maxage: 100*100*60} 
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-
+app.use(passport.AuthenticatedUser);
 
 app.use("/",require("./Routes/route"));
 

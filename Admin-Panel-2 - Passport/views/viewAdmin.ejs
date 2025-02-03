@@ -8,6 +8,7 @@
   <link rel="shortcut icon" type="image/png" href="../assets/images/logos/seodashlogo.png" />
   <link rel="stylesheet" href="../../node_modules/simplebar/dist/simplebar.min.css">
   <link rel="stylesheet" href="../assets/css/styles.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -31,6 +32,7 @@
                   <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Name</th>
+                    <th scope="col">Mobile Number</th>
                     <th scope="col">Email</th>
                     <th scope="col">Password</th>
                     <th scope="col">Gender</th>
@@ -44,6 +46,7 @@
                         <tr>
                           <th><%=i+1%></th>
                           <td><%=e.name%></td>
+                          <td><%=e.mobile%></td>
                           <td><%=e.email%></td>
                           <td><%=e.password%></td>
                           <td><%=e.gender%></td>
@@ -51,8 +54,8 @@
                             <img src="<%=e.image%>" alt="" style="height: 40px;">
                           </td>
                           <td>
-                            <button><a href="/deleteAdmin?id=<%=e.id%>">Delete</a></button>
-                            <button><a href="/editAdmin?id=<%=e.id%>">Edit</a></button>
+                            <button style="border:none;"><a href="/deleteAdmin?id=<%=e.id%>"><i class="fa-solid fa-trash" style="color: red;font-size: 20px;"></i></a></button>
+                            <button style="border:none;padding-left: 25px;"><a href="/editAdmin?id=<%=e.id%>"><i class="fa-solid fa-pen-to-square" style="color: green;font-size: 20px;"></i></a></button>
                           </td>
                         </tr>
                       </tbody>

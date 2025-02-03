@@ -1,6 +1,7 @@
 const fs = require("fs");
 const schema = require("../Model/adminSchema");
 const path = require("path");
+const { log } = require("console");
 
 module.exports.login = (req, res) => {
   res.render("login");
@@ -9,6 +10,9 @@ module.exports.userlogin = async (req, res) => {
   
   res.redirect("/dashboard");
 };
+module.exports.recoverpass = (req,res)=>{
+  res.render("recoverpass");
+}
 module.exports.logout = async (req, res) => {
   req.session.destroy();
   res.redirect("/");
@@ -50,3 +54,27 @@ module.exports.updateAdmin = async (req, res) => {
   let data = await schema.findByIdAndUpdate(req.body.id, req.body);
   data && res.redirect("/viewAdmin");
 };
+module.exports.profile = (req,res)=>{
+  res.render("profile");
+}
+module.exports.changepass = (req,res)=>{
+  res.render("changepass");
+}
+module.exports.changepassword = async(req,res)=>{
+  let user = req.user ;
+  if (user.password == req.body.oldpass){
+    if (req.body.oldpass != req.body.newpass) {
+      if(req.body.newpass == req.body.confirmpass){
+        let admin = await schema.findByIdAndUpdate(user.id,{password:req.body.newpass})
+        admin && res.redirect("/logout");
+      }else{
+        console.log("Password must be Same");
+      }
+    }else{
+      console.log("New Passwords must be Different");
+    }
+  }else{
+    console.log("Old Password Wronge");
+    
+  }
+}

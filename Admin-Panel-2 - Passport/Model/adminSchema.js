@@ -5,6 +5,10 @@ const schema = mongoose.Schema({
     type: String,
     required: true,
   },
+  mobile: {
+    type: String,
+    require: true,
+  },
   email: {
     type: String,
     require: true,
