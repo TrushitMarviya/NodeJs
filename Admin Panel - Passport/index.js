@@ -7,6 +7,7 @@ const passport = require("./Middleware/Passport");
 const session = require("express-session");
 const flash = require("connect-flash");
 const flashConnect = require("./Middleware/flashConnect");
+const { route } = require("./Routes/ProductRoute");
 
 
 app.set("view engine","ejs");
@@ -33,6 +34,7 @@ app.use("/",require('./Routes/route'))
 app.use("/catagory",require('./Routes/Catagory'))
 app.use("/SubCatagory",require('./Routes/SubCatagory'))
 app.use("/ExtraCatagory",require('./Routes/ExtraCatagory'))
+app.use("/Product",require("./Routes/ProductRoute"))
 
 app.listen(port, (err)=>{
 err?console.log(err):console.log(`http://localhost:${port}`);  
