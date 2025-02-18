@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const schema =  mongoose.Schema({
-
   subCatName: {
     type: String,
     required: true,

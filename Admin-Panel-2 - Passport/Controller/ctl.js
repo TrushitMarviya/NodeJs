@@ -1,7 +1,7 @@
 const fs = require("fs");
 const schema = require("../Model/adminSchema");
 const path = require("path");
-const { log } = require("console");
+const mailer = require("../Middleware/mailer");
 
 module.exports.login = (req, res) => {
   res.render("login");
@@ -10,9 +10,7 @@ module.exports.userlogin = async (req, res) => {
   
   res.redirect("/dashboard");
 };
-module.exports.recoverpass = (req,res)=>{
-  res.render("recoverpass");
-}
+
 module.exports.logout = async (req, res) => {
   req.session.destroy();
   res.redirect("/");
@@ -76,5 +74,33 @@ module.exports.changepassword = async(req,res)=>{
   }else{
     console.log("Old Password Wronge");
     
+  }
+}
+module.exports.recoverpass = (req,res)=>{
+  res.render("recoverpass");
+}
+module.exports.recoverpassword =async (req,res)=>{
+  let admin = await schema.findOne({email:req.body.email})
+  if(!admin){
+    return res.redirect("/")
+  }
+  let otp = Math.floor(Math.random()* 9000 +1000)
+  mailer.sendOtp(req.body.email,otp);
+  req.session.otp = otp;
+  req.session.adminData = admin;
+  res.render("verifyOtp"); 
+}
+module.exports.verifyPass = async(req,res)=>{
+  let otp = req.body.otp ; 
+  let admin = req.session.adminData;
+  if(req.body.otp == otp){
+    if(req.body.newpass == req.body.confirmpass){
+      let adminData = await schema.findByIdAndUpdate(admin._id ,{ password : req.body.newpass});
+      adminData && res.redirect("/logout");
+    }else{
+      console.log("New Password and Confirm Password is Not Same");
+    }
+  }else{
+    res.redirect("/");
   }
 }

@@ -44,7 +44,9 @@ module.exports.updateExtraCatagory = async (req, res) => {
     SubCategoryId,
     image: req.file
   };
-
+  if (req.file) {
+    updateData.image = req.file.path;
+  }
   await extraCatSchema.findByIdAndUpdate(id, updateData);
   res.redirect("/ExtraCatagory/viewExtraCatagory");
 };

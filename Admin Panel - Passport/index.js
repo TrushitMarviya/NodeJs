@@ -7,7 +7,6 @@ const passport = require("./Middleware/Passport");
 const session = require("express-session");
 const flash = require("connect-flash");
 const flashConnect = require("./Middleware/flashConnect");
-const { route } = require("./Routes/ProductRoute");
 
 
 app.set("view engine","ejs");

@@ -1,7 +1,9 @@
+const path = require("path");
 const CatSchema = require("../model/CatSchema");
 const SubCatSchema = require("../model/subCatSchema");
 const ExtraCatSchema = require("../model/extraCatSchema");
 const ProductSchema = require("../model/ProductSchema");
+const fs = require("fs");
 const productSchema = require("../model/ProductSchema");
 
 module.exports.addProd = async (req, res) => {
@@ -28,10 +30,12 @@ module.exports.viewProduct = async (req, res) => {
 };
 
 module.exports.deleteProduct = async (req, res) => {
-  let singleData = await productSchema.findById(req.query.id);
-  let data = await productSchema.findByIdAndDelete(req.query.id).then ((data)=>{
-    res.redirect("/Product/viewProduct");
-  })
+  let singleData = await ProductSchema.findById(req.query.id);
+  if (singleData.image) {
+    fs.unlinkSync(singleData.image);
+  }
+  await ProductSchema.findByIdAndDelete(req.query.id);
+  res.redirect("/Product/viewProduct");
 };
 
 module.exports.editProduct = async (req, res) => {
@@ -48,15 +52,16 @@ module.exports.editProduct = async (req, res) => {
 };
 
 module.exports.updateProduct = async (req, res) => {
+  const { id, productName, CategoryId, SubCategoryId, ExtraCategoryId } = req.body;
   let updateData = {
-    productName: req.body.productName,
-    extraCatName: req.body.extraCatName,
-    subCatName: req.body.subCatName,
-    CategoryId: req.body.CategoryId,
+    productName,
+    CategoryId,
+    SubCategoryId,
+    ExtraCategoryId,
   };
   if (req.file) {
     updateData.image = req.file.path;
   }
-  await ProductSchema.findByIdAndUpdate(req.body.id, updateData);
+  await ProductSchema.findByIdAndUpdate(id, updateData);
   res.redirect("/Product/viewProduct");
 };

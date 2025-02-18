@@ -18,6 +18,8 @@ route.post("/updateAdmin", multer, ctl.updateAdmin);
 route.get("/profile",ctl.profile)
 route.get("/changepass",passport.checkAuth,ctl.changepass)
 route.post("/changepass",passport.checkAuth,ctl.changepassword)
-
+route.get("/recoverpass",ctl.recoverpass)
+route.post("/recoverpass",ctl.recoverpassword)
+route.post("/verifypass",ctl.verifyPass)
 
 module.exports = route;

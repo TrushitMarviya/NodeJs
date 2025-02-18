@@ -17,13 +17,13 @@ module.exports.viewSubCatagory = async (req, res) => {
   await subCatSchema
     .find({})
     .populate("CategoryId")
-    .then((data) => {
+    .then((data) => { 
       res.render("viewSubCatagory", { data });
     });
 };
 module.exports.deleteSubCatagory = async (req, res) => {
   let singleData = await subCatSchema.findById(req.query.id);
-      fs.unlinkSync(singleData.image);
+  fs.unlinkSync(singleData.image);
   let data = await subCatSchema.findByIdAndDelete(req.query.id).then((data) => {
     res.redirect("/SubCatagory/viewSubCatagory");
   });
