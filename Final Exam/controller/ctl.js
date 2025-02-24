@@ -1,4 +1,4 @@
-const schema = require("../model/Schema");
+const { User, Blog } = require("../model/Schema");
 
 module.exports.register = async (req, res) => {
   res.render("Register");
@@ -9,7 +9,13 @@ module.exports.login = async (req, res) => {
 };
 
 module.exports.dashboard = async (req, res) => {
-  res.render("dashboard");
+  try {
+    const data = await Blog.find({});
+    res.render("dashboard", { data });
+  } catch (error) {
+    console.error("Error retrieving blogs:", error);
+    res.status(500).send("Internal Server Error");
+  }
 };
 
 module.exports.addRegister = async (req, res) => {
@@ -19,11 +25,11 @@ module.exports.addRegister = async (req, res) => {
       return res.status(400).send("All fields are required");
     }
 
-    const existingUser = await schema.findOne({});
+    const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.redirect("/dashboard");
     }
-    await schema.create(req.body);
+    await User.create(req.body);
     res.redirect("/dashboard");
   } catch (error) {
     console.error("Error adding data to Mongoose:", error);
@@ -38,7 +44,7 @@ module.exports.userlogin = async (req, res) => {
       return res.status(400).send("All fields are required");
     }
 
-    const user = await schema.findOne({ email, password });
+    const user = await User.findOne({ email, password });
     if (!user) {
       return res.redirect("/login");
     }
@@ -50,13 +56,9 @@ module.exports.userlogin = async (req, res) => {
   }
 };
 
-module.exports.addBlog = async (req, res) => {
+module.exports.addblog = async (req, res) => {
   try {
-    const { blog } = req.body;
-    if (!blog) {
-      return res.status(400).send("Blog content is required");
-    }
-    await schema.create({ blog });
+    await Blog.create(req.body);
     res.redirect("/dashboard");
   } catch (error) {
     console.error("Error adding blog:", error);
@@ -64,32 +66,34 @@ module.exports.addBlog = async (req, res) => {
   }
 };
 
-module.exports.getBlogs = async (req, res) => {
+module.exports.viewBlog = async (req, res) => {
   try {
-    const blogs = await schema.find({});
-    res.render("dashboard", { blogs });
-  } catch (error) {
-    console.error("Error fetching blogs:", error);
-    res.status(500).send("Internal Server Error");
+    const data = await Blog.find({});
+    res.render("viewBlog", { data });
+  } catch (err) {
+    console.error("Error retrieving blogs:", err);
+    res.status(500).send("Error retrieving blogs");
   }
 };
-
 module.exports.deleteBlog = async (req, res) => {
-  try {
-    const { id } = req.params;
-    await schema.findByIdAndDelete(id);
+  let singleData = await Blog.findById(req.query.id);
+  let data = await Blog.findByIdAndDelete(req.query.id).then((data) => {
     res.redirect("/dashboard");
+  });
+};
+module.exports.editBlog = async (req, res) => {
+  try {
+    const singleData = await Blog.findById(req.query.id);
+    res.render("editBlog", { singleData });
   } catch (error) {
-    console.error("Error deleting blog:", error);
+    console.error("Error retrieving blog for edit:", error);
     res.status(500).send("Internal Server Error");
   }
 };
 
 module.exports.updateBlog = async (req, res) => {
   try {
-    const { id } = req.params;
-    const { blog } = req.body;
-    await schema.findByIdAndUpdate(id, { blog });
+    await Blog.findByIdAndUpdate(req.body.id, req.body);
     res.redirect("/dashboard");
   } catch (error) {
     console.error("Error updating blog:", error);

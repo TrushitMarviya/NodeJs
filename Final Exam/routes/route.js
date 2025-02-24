@@ -7,5 +7,8 @@ route.get("/login", ctl.login);
 route.get("/dashboard", ctl.dashboard);
 route.post("/addRegister", ctl.addRegister);
 route.post("/userlogin", ctl.userlogin);
-
+route.post("/addblog", ctl.addblog);
+route.get("/viewBlog", ctl.viewBlog);
+route.get("/deleteBlog", ctl.deleteBlog);
+route.get("/editBlog", ctl.editBlog);
 module.exports = route;
