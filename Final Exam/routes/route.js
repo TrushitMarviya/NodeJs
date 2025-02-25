@@ -11,4 +11,6 @@ route.post("/addblog", ctl.addblog);
 route.get("/viewBlog", ctl.viewBlog);
 route.get("/deleteBlog", ctl.deleteBlog);
 route.get("/editBlog", ctl.editBlog);
+route.post("/editBlog", ctl.updateBlog);
+
 module.exports = route;

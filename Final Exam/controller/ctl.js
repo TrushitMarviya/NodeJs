@@ -93,10 +93,10 @@ module.exports.editBlog = async (req, res) => {
 
 module.exports.updateBlog = async (req, res) => {
   try {
-    await Blog.findByIdAndUpdate(req.body.id, req.body);
+    const { id, title, content } = req.body;
+    await Blog.findByIdAndUpdate(id, { blogName: title, blog: content });
     res.redirect("/dashboard");
   } catch (error) {
-    console.error("Error updating blog:", error);
-    res.status(500).send("Internal Server Error");
+    res.status(500).send("Error updating blog");
   }
 };
